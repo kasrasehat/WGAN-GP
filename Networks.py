@@ -10,6 +10,9 @@ class Generator(nn.Module):
         im_chan: the number of channels in the images, fitted for the dataset used, a scalar
               (MNIST is black-and-white, so 1 channel is your default)
         hidden_dim: the inner dimension, a scalar
+        Input: (N,Cin,Hin,Win)
+        Output: (N,Cout,Hout,Wout)
+        Hout=(Hin−1)×stride[0]−2×padding[0]+dilation[0]×(kernel_size[0]−1)+output_padding[0]+1
     '''
     def __init__(self, z_dim=10, im_chan=1, hidden_dim=64):
         super(Generator, self).__init__()
@@ -52,6 +55,7 @@ class Generator(nn.Module):
         returns generated images.
         Parameters:
             noise: a noise tensor with dimensions (n_samples, z_dim)
+        z_dim of noise is considered as number of channels of input which each channel has size of 1*1
         '''
         x = noise.view(len(noise), self.z_dim, 1, 1)
         return self.gen(x)
