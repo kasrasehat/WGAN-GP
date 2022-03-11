@@ -60,7 +60,7 @@ transform = transforms.Compose([
 ])
 
 dataloader = DataLoader(
-    MNIST('.', download=False, transform=transform),
+    MNIST('.', download=True, transform=transform),
     batch_size=batch_size,
     shuffle=True)
 

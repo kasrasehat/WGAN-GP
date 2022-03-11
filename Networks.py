@@ -36,6 +36,9 @@ class Generator(nn.Module):
             stride: the stride of the convolution
             final_layer: a boolean, true if it is the final layer and false otherwise
                       (affects activation and batchnorm)
+            Input: (N,Cin,Hin,Win)
+            Output: (N,Cout,Hout,Wout)
+            Hout=(Hin−1)×stride[0]−2×padding[0]+dilation[0]×(kernel_size[0]−1)+output_padding[0]+1
         '''
         if not final_layer:
             return nn.Sequential(
